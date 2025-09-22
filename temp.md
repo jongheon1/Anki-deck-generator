@@ -84,20 +84,6 @@ Based on Michael Nielsen's "Augmenting Long-term Memory" principles:
 - Focus on content that shows the logical flow of the author's reasoning
 - Include context that helps disambiguate technical terms or concepts
 
-## Note Generation Guidelines
-
-### Adaptive Quantity Based on Paper Characteristics
-
-**Short Papers (4-8 pages)**: 15-25 notes
-**Standard Papers (8-12 pages)**: 25-40 notes  
-**Long Papers (12+ pages)**: 40-60 notes
-
-**Density Factors:**
-- High technical novelty: +20% notes
-- Foundational/survey papers: +30% notes
-- Incremental improvements: -20% notes
-- Heavy mathematical content: Focus on key theorems/proofs
-
 ## Output Specifications
 
 ## TSV Format Structure
@@ -163,5 +149,3 @@ Special requirements: [Any specific concepts or themes to emphasize]
 
 Generate an appropriately sized deck based on paper length and technical density, following the academic paper analysis framework. Focus on extracting sentences with substantial technical content and providing authentic surrounding context that illuminates the author's reasoning.
 ```
-
-This streamlined approach maintains the educational effectiveness of Nielsen's principles while providing the authentic contextual learning that helps build deep understanding of academic papers through the author's own words and logical flow.
