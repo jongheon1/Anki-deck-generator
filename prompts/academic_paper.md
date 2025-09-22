@@ -86,7 +86,7 @@ Based on Michael Nielsen's "Augmenting Long-term Memory" principles:
 
 ## Output Specifications
 
-## TSV Format Structure
+### TSV Format Structure
 
 **Fields:** Original_Sentence | Surrounding_Context
 
