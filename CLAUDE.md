@@ -82,10 +82,46 @@ Generated Anki card templates (HTML/CSS/JS):
 1. **Source Preparation**: Place source material in `sources/` directory
 2. **Prompt Selection**: Choose appropriate prompt from `prompts/` directory
 3. **Generation Request**: Request processing using the specified prompt
-4. **Output Generation**:
+4. **Style Selection** (Interactive Mode):
+   - Generate 2-3 sample cards with different style variations
+   - Present examples to user showing different approaches
+   - Ask user to select preferred style or provide custom preferences
+   - Proceed with full generation using selected style
+5. **Output Generation**:
    - TSV file created in `results/`
    - Card template created in `card_templates/` (only if template doesn't already exist)
-5. **Anki Import**: Use generated template and import TSV data
+6. **Anki Import**: Use generated template and import TSV data
+
+### Interactive Style Selection
+
+**IMPORTANT**: Before generating the full TSV file, follow this interactive workflow:
+
+1. **Generate Style Variations**
+   - Create 2-3 example cards from the source material
+   - Each example should use a different stylistic approach while following the prompt's field structure
+   - Variations can differ in:
+     - Tone (formal/casual, academic/practical)
+     - Complexity level (beginner/intermediate/advanced)
+     - Question style (direct/contextual, simple/analytical)
+     - Content focus (breadth vs. depth, theory vs. application)
+
+2. **Present Options to User**
+   - Show the example variations clearly
+   - Explain the characteristics of each style
+   - Use the AskUserQuestion tool to let user select their preferred approach
+   - Option to customize or combine styles
+
+3. **Generate Full Content**
+   - Once style is confirmed, proceed with generating all cards
+   - Maintain consistency with the selected style throughout
+   - Apply the style preferences to all generated content
+
+**Example Style Variations**:
+```
+Style A (Academic/Formal): Deep conceptual focus, precise terminology
+Style B (Practical/Applied): Real-world examples, simpler language
+Style C (Balanced): Mix of theory and application, moderate complexity
+```
 
 ## Output Specifications
 
@@ -165,14 +201,24 @@ Generated Anki card templates (HTML/CSS/JS):
    - These specific prompt rules ALWAYS take precedence over general guidelines in this CLAUDE.md
    - Follow the exact field structures, formatting requirements, and content strategies defined in the chosen prompt
 
-2. **Processing Order**
+2. **Interactive Style Selection First**
+   - **NEVER generate the full TSV immediately** upon receiving a generation request
+   - ALWAYS start by creating 2-3 style-varied example cards
+   - Use AskUserQuestion tool to present options and get user preference
+   - Only proceed with full generation after user confirms their preferred style
+   - This applies to ALL new generation requests (does not apply to modifications of existing files)
+
+3. **Processing Order**
    - Load and prioritize the specific prompt template first
+   - Read source material to understand content
+   - Generate 2-3 style variations and present to user
+   - Wait for user style selection
    - Check for existing card template: `card_templates/[prompt_name].txt`
-   - Generate TSV file according to prompt specifications
+   - Generate full TSV file according to prompt specifications and selected style
    - Create card template only if it doesn't exist
    - Use this CLAUDE.md only for general workflow and project structure guidance
 
-3. **Template Management**
+4. **Template Management**
    - Template filename must match prompt filename (without .md extension)
    - Reuse existing templates to maintain consistency across generations
    - Only create new templates when prompt requires different field structure or design
