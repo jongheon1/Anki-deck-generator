@@ -7,10 +7,10 @@ User listens via TTS, transcribes the sentence, then checks the answer.
 ## Configuration
 
 ### CEFR Level
-- B2-C1 (TOEFL academic level)
+- B1-B2
 
 ### Sentence Specs
-- **Length**: 12-20 words (TOEFL average sentence length)
+- **Length**: 10 - 15 words
 - **Style**: Academic lecture/discussion style
 - **Natural speech**: Include discourse markers, academic transitions
 
