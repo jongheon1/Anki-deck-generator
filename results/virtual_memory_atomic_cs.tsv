@@ -1,0 +1,60 @@
+What is address translation in virtual memory?	The process of converting a virtual address to a physical address using page tables and hardware support like the MMU.
+What two main components make up a virtual address?	The Virtual Page Number (VPN) for indexing the page table, and the Virtual Page Offset (VPO) for locating bytes within a page.
+What is the role of the MMU in address translation?	The MMU (Memory Management Unit) translates virtual addresses to physical addresses by walking page tables and enforcing memory protection.
+What happens when the valid bit in a PTE is 0?	A page fault exception is triggered, causing the OS to handle the missing page by loading it from disk or terminating the process.
+What is the purpose of the TLB in virtual memory?	The TLB (Translation Lookaside Buffer) caches recent address translations to avoid costly page table lookups on every memory access.
+How is the physical address formed after address translation?	By concatenating the Physical Page Number (PPN) from the PTE with the Virtual Page Offset (VPO) from the original virtual address.
+What is a page table entry (PTE)?	A data structure that maps a virtual page to a physical page and contains metadata like valid, dirty, and permission bits.
+Why is the page offset not translated during address translation?	Because pages are contiguous blocks, the offset within a virtual page maps directly to the same offset in the physical page.
+What is a page hit in virtual memory?	When the requested virtual page is already in physical memory (valid bit = 1), allowing immediate access without disk I/O.
+What is a page fault?	An exception raised when a program accesses a virtual page that is not currently in physical memory (valid bit = 0).
+What does the dirty bit in a PTE indicate?	Whether the page has been modified since being loaded into memory, determining if it must be written back to disk when evicted.
+What is the purpose of permission bits in a PTE?	They specify access rights (read, write, execute) for the page, enabling memory protection and preventing unauthorized access.
+In a single-level page table, how is the PPN obtained?	The VPN is used as an index into the page table array to access the PTE containing the PPN.
+What is a TLB miss?	When the requested address translation is not in the TLB cache, requiring a page table walk in main memory.
+What is a TLB hit?	When the MMU finds the required address translation in the TLB, avoiding a page table lookup and speeding up memory access.
+Why do systems use multi-level page tables?	To reduce memory overhead by allocating page table space only for used regions of the virtual address space, not the entire range.
+What is a page table walk?	The process of traversing multiple levels of page tables to translate a virtual address when there's a TLB miss.
+How does a 2-level page table reduce memory usage?	It splits the VPN into two parts, creating a hierarchy where second-level tables are allocated only for active memory regions.
+What is the coverage of a TLB?	The total amount of virtual address space that can be translated by all entries currently cached in the TLB.
+What happens during a TLB hit in the address translation pipeline?	The MMU retrieves the PPN directly from the TLB, concatenates it with the VPO, and accesses physical memory without touching the page table.
+What is memory mapping (mmap) in Unix systems?	A mechanism to map files or devices into a process's virtual address space, allowing file I/O through memory operations.
+What system call creates a memory mapping in Linux?	The mmap() function, which maps a file descriptor or anonymous memory into the process's address space.
+What is the benefit of using mmap for file I/O?	It eliminates explicit read/write system calls by allowing direct memory access, improving performance through the kernel's page cache.
+What is an anonymous mapping?	A memory mapping not backed by a file, used for allocating private memory like the heap or stack regions.
+What is a shared mapping in mmap?	A mapping where changes to the memory region are visible to other processes mapping the same object, enabling IPC.
+What is a private mapping (MAP_PRIVATE)?	A copy-on-write mapping where modifications create a private copy, isolating changes from other processes and the underlying file.
+How does copy-on-write work with private mappings?	Initially pages are shared read-only; when a write occurs, the kernel copies the page and updates the writing process's page table.
+What happens when you call munmap()?	The specified virtual memory region is unmapped, removing the mapping from the page table and invalidating TLB entries.
+What is the execve system call's relationship to memory mapping?	It replaces the current process's memory image by creating new mappings for code, data, heap, and stack from the executable file.
+How does fork() use memory mapping?	It creates a child process with identical virtual memory mappings, using copy-on-write to share physical pages until modifications occur.
+What is dynamic memory allocation?	Runtime allocation of memory from the heap, where the size and lifetime are determined during program execution, not at compile time.
+What does the malloc function do?	Allocates a block of at least the requested size from the heap and returns a pointer, or NULL if allocation fails.
+What does the free function do?	Returns a previously allocated block back to the heap's free list, making it available for future allocations.
+What is the heap in dynamic memory allocation?	A region of virtual memory that grows upward (higher addresses) and is managed by the allocator for dynamic allocations.
+Why is dynamic memory allocation necessary?	To handle data structures whose size is unknown at compile time or varies during execution, like linked lists or user input buffers.
+What is an allocator in the context of malloc/free?	Software that manages the heap by tracking free blocks, splitting and coalescing them, and servicing allocation requests.
+What is internal fragmentation in memory allocation?	Wasted space within an allocated block when the payload is smaller than the block size due to alignment or minimum size requirements.
+What is external fragmentation?	Wasted space where total free memory is sufficient but no single free block is large enough to satisfy an allocation request.
+What is a free list?	A data structure maintained by the allocator that tracks all free blocks available for allocation.
+What is block coalescing in memory allocation?	Merging adjacent free blocks into a single larger block to reduce fragmentation and improve allocation success for large requests.
+What is block splitting in malloc?	Dividing a free block into an allocated part (satisfying the request) and a new smaller free block (remainder).
+What is an implicit free list?	A free list where block boundaries are found by traversing size fields in headers, without explicit next/prev pointers between blocks.
+What is an explicit free list?	A free list using explicit pointers (next/prev) stored in free blocks to link them, enabling faster free block searches.
+What is a segregated free list?	An allocator design maintaining multiple free lists, each for blocks within a specific size class, improving allocation speed.
+What is the first-fit allocation strategy?	Searching the free list from the beginning and allocating the first block large enough to satisfy the request.
+What is the best-fit allocation strategy?	Searching the entire free list to find the smallest block that can satisfy the request, minimizing leftover fragmentation.
+What is a boundary tag?	A footer at the end of a block containing the same size information as the header, enabling backward traversal and coalescing.
+What problem do boundary tags solve?	They allow constant-time coalescing with previous blocks by enabling the allocator to find the preceding block's header without linear search.
+What is placement policy in memory allocation?	The strategy for selecting which free block to use when multiple blocks can satisfy an allocation request (e.g., first-fit, best-fit).
+What is the purpose of alignment requirements in malloc?	To ensure allocated blocks start at addresses that satisfy hardware constraints for efficient access and avoid alignment faults.
+Why does malloc typically enforce 8-byte or 16-byte alignment?	To satisfy alignment requirements for double-precision floats and SIMD instructions, ensuring correct and efficient memory access.
+What is the minimum block size in typical allocators?	Usually 16-24 bytes to accommodate the header, footer, and minimum payload required for storing free list pointers.
+What is heap consistency checking?	Runtime validation that the heap data structures (headers, footers, free lists) are consistent and uncorrupted, used for debugging allocators.
+What is the sbrk system call used for?	Expanding or contracting the heap by adjusting the break pointer (end of the heap region) to request more memory from the kernel.
+What is garbage collection?	Automatic memory management where the runtime identifies and reclaims memory that is no longer reachable by the program.
+What is a mark-and-sweep garbage collector?	A GC algorithm that marks all reachable objects from roots, then sweeps through memory to free unmarked (unreachable) blocks.
+What is a memory leak?	A bug where allocated memory is never freed and becomes unreachable, gradually consuming available memory until exhaustion.
+What are root pointers in garbage collection?	Pointers stored in registers, stack, and global variables that serve as starting points for tracing reachable memory.
+What is conservative garbage collection?	A GC approach that treats any bit pattern resembling a valid pointer as a potential pointer, avoiding false collection at the cost of some leaks.
+What is heap memory utilization?	The ratio of payload bytes to total heap size, measuring how efficiently the allocator uses memory versus overhead and fragmentation.

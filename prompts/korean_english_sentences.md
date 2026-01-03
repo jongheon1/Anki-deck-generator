@@ -24,20 +24,6 @@ Output must be strictly 2 columns separated by a TAB.
 **Example:**
 이번 학기에 전공 수업 몇 개 들어?	How many major classes are you taking this semester?
 제 강점은 새로운 기술을 빨리 배운다는 거예요.	My strength is that I can learn new technologies quickly.
-
-## Contexts (Selectable)
-
-1. **Daily Life**: Hobbies, Weekend plans, Food, Travel
-2. **Office Life**: Status updates, Asking for help, Scheduling
-3. **School Life (New)**:
-   - Group projects & Teamwork
-   - Asking professors/TAs questions
-   - Campus life & Exchange student situations
-4. **Job Interview (New)**:
-   - Self-introduction (Simple)
-   - Describing projects (STAR method basics)
-   - Talking about strengths/weaknesses
-   - Asking the interviewer questions
    
 
 ## Output Requirements
@@ -47,10 +33,3 @@ Output must be strictly 2 columns separated by a TAB.
 2. **NO Header**: Do not include "Korean | English" at the top.
 3. **NO Numbering**: Do not add "1.", "2." at the start.
 4. **NO Extra text**: Just the raw TSV data in a code block.
-
-## Prompt Template to use
-
-"Create [NUMBER] sentence pairs about [CONTEXT].
-Level: A2/B1 mix.
-Format: Korean [TAB] English
-Keep the Korean natural."

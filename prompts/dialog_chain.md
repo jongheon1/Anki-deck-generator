@@ -3,33 +3,6 @@
 This template generates realistic, multi-turn dialogue chains for **Developer & Daily Life** situations.
 It breaks down a conversation into "Stimulus (Front)" and "Response (Back)" Anki cards.
 
-## 1. Contexts (Choose One)
-
-### A. Exchange Student & Campus Life
-- **Dorm Life**: Resolving roommate conflicts (cleaning, noise), rules.
-- **Team Projects**: Assigning roles, handling free riders, discussion.
-- **Academic**: Asking professors for extensions, borrowing notes, admin requests.
-
-### B. Global Tech Company & Developer
-- **Engineering**: Code review defense, Stand-up updates, Incident response.
-- **Communication**: Negotiating deadlines with PM, Salary negotiation, Exit interview.
-- **Office Life**: Small talk with colleagues, Mentoring juniors.
-
-### C. Job Interview (Process)
-- **Behavioral**: Self-intro, Weaknesses, Conflict resolution (STAR method).
-- **Technical**: System design discussion, Explaining thought process in live coding.
-- **Closing**: Asking insightful questions to the interviewer.
-
-### D. Real Survival & Travel
-- **Service**: Complex ordering (Cafe/Subway), Handling complaints/refunds.
-- **Vital Needs**: Explaining symptoms (Hospital/Pharmacy), Haircut requests.
-- **Emergency**: Lost & Found, Police, Navigation help.
-
-### E. Social & Dating
-- **Making Friends**: Ice breaking at parties, Finding common interests.
-- **Romance**: Asking someone out, Flirting, Polite rejection.
-- **Deep Talk**: Consoling a friend, Apologizing, Giving compliments.
-
 ## 2. Chain Logic (The Flow)
 
 Generate a dialogue of **4-8 turns**. Then split it strictly into pairs:
@@ -60,10 +33,3 @@ Fair point... (Propose: Tree-shaking solution)	I can configure tree-shaking to o
 2. **No Headers**: Do not include "Stimulus | Response".
 3. **No Code Blocks**: Just raw text lines.
 4. **Natural Spoken English**: Use appropriate tone (Formal/Casual/Slang).
-
-## 5. Prompt Template to use
-
-"Create a [LENGTH] dialogue chain about [SPECIFIC CONTEXT].
-Role: Person B is the [USER].
-Tone: [TONE].
-Format: Stimulus [TAB] Response."
